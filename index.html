@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll of Relics - Legacy Games</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #2c1b0f 0%, #3e2a1a 100%);
+      color: #e0d4b8;
+      font-family: 'Cinzel', serif;
+      overflow-x: hidden;
+    }
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: url('https://via.placeholder.com/1920x1080?text=Ancient+Ruins') no-repeat center/cover;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(44, 27, 15, 0.5);
+      z-index: 1;
+    }
+    .glow-effect {
+      box-shadow: 0 0 30px rgba(201, 121, 29, 0.7);
+    }
+    .game-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid #c9791d;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 30px rgba(201, 121, 29, 0.9);
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(201, 121, 29, 0.3), transparent);
+      transition: 0.5s;
+    }
+    .game-card:hover::before {
+      left: 100%;
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 3px;
+      bottom: -3px;
+      left: 0;
+      background-color: #c9791d;
+      transition: width 0.4s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .particle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: #c9791d;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10;
+    }
+    @font-face {
+      font-family: 'Cinzel';
+      src: url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-opacity-95 bg-[#2c1b0f] z-50 py-4">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="text-3xl font-bold text-amber-600">Scroll of Relics</div>
+      <div class="space-x-8">
+        <a href="#home" class="nav-link text-amber-200 hover:text-amber-600 text-lg">Home</a>
+        <a href="#game" class="nav-link text-amber-200 hover:text-amber-600 text-lg">The Game</a>
+        <a href="#team" class="nav-link text-amber-200 hover:text-amber-600 text-lg">Team</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="text-center relative z-10">
+      <img src="coat of arms.jpg" alt="Game Logo" class="mx-auto mb-6 animate-logo">
+      <h1 class="text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-red-700 mb-6 animate-title">Scroll of Relics</h1>
+      <p class="text-2xl text-amber-200 mb-8 max-w-3xl mx-auto">Uncover ancient secrets in the sands of Egypt and Carthage. A historical odyssey awaits!</p>
+      <a href="#game" class="inline-block bg-amber-600 text-white px-10 py-4 rounded-full glow-effect hover:bg-amber-700 transition text-lg">Discover the Relics</a>
+    </div>
+  </section>
+
+  <!-- Game Section -->
+  <section id="game" class="py-24 relative">
+    <div class="container mx-auto px-4">
+      <h2 class="text-5xl font-bold text-center text-amber-600 mb-16 animate-section-title">Scroll of Relics</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="game-card bg-[#3e2a1a] rounded-lg p-8 animate-card">
+          <img src="temp.png" alt="Egyptian Temple" class="rounded-lg mb-6 w-full">
+          <h3 class="text-3xl font-semibold text-amber-400 mb-4">Temples of Egypt</h3>
+          <p class="text-amber-200">Explore sacred temples, decipher hieroglyphs, and wield the power of the pharaohs.</p>
+        </div>
+        <div class="game-card bg-[#3e2a1a] rounded-lg p-8 animate-card">
+          <img src="coming.jpg" alt="Carthaginian Port" class="rounded-lg mb-6 w-full">
+          <h3 class="text-3xl font-semibold text-amber-400 mb-4">Carthage's Glory</h3>
+          <p class="text-amber-200">Command mighty fleets and dominate the Mediterranean with cunning strategy.</p>
+        </div>
+        <div class="game-card bg-[#3e2a1a] rounded-lg p-8 animate-card">
+          <img src="coming.jpg" alt="Relic Battle" class="rounded-lg mb-6 w-full">
+          <h3 class="text-3xl font-semibold text-amber-400 mb-4">Relic Wars</h3>
+          <p class="text-amber-200">Engage in thrilling battles to secure ancient relics that hold untold power.</p>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <img src="game.png" alt="Gameplay Showcase" class="rounded-lg mx-auto mb-6 w-full max-w-4xl">
+        <p class="text-xl text-amber-200 max-w-2xl mx-auto">Experience a world where history and legend collide in breathtaking detail.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="py-24 bg-[#2c1b0f] relative">
+    <div class="container mx-auto px-4">
+      <h2 class="text-5xl font-bold text-center text-amber-600 mb-16 animate-section-title">Legacy Games Team</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="text-center animate-team">
+          <img src="med.png" alt="Alex Doe" class="rounded-full mx-auto mb-6 w-48 h-48 glow-effect">
+          <h3 class="text-2xl font-semibold text-amber-400">Mohamed maalej</h3>
+          <p class="text-amber-200">Lead Developer</p>
+          <p class="text-amber-300 mt-4">Weaving code to bring ancient history to life.</p>
+        </div>
+        <div class="text-center animate-team">
+          <img src="nour.png" alt="Jane Smith" class="rounded-full mx-auto mb-6 w-48 h-48 glow-effect">
+          <h3 class="text-2xl font-semibold text-amber-400">Mohamed Nour Mrad</h3>
+          <p class="text-amber-200">Level Designer</p>
+          <p class="text-amber-300 mt-4">Building intricate worlds for epic adventures.</p>
+        </div>
+        <div class="text-center animate-team">
+          <img src="mahmoud.png" alt="Sam Lee" class="rounded-full mx-auto mb-6 w-48 h-48 glow-effect">
+          <h3 class="text-2xl font-semibold text-amber-400">Sam Lee</h3>
+          <p class="text-amber-200">Game Designer</p>
+          <p class="text-amber-300 mt-4">Crafting epic quests inspired by ancient relics.</p>
+        </div>
+        <div class="text-center animate-team">
+          <img src="houssien.png" alt="Emma Brown" class="rounded-full mx-auto mb-6 w-48 h-48 glow-effect">
+          <h3 class="text-2xl font-semibold text-amber-400">Emma Brown</h3>
+          <p class="text-amber-200">Lead Writer</p>
+          <p class="text-amber-300 mt-4">Weaving rich narratives of ancient empires and relics.</p>
+        </div>
+        <div class="text-center animate-team">
+          <img src="anas.png" alt="Michael Chen" class="rounded-full mx-auto mb-6 w-48 h-48 glow-effect">
+          <h3 class="text-2xl font-semibold text-amber-400">Michael Chen</h3>
+          <p class="text-amber-200">Sound Designer</p>
+          <p class="text-amber-300 mt-4">Creating immersive soundscapes of deserts and battles.</p>
+        </div>
+        <div class="text-center animate-team">
+          <img src="may.png" alt="Olivia Davis" class="rounded-full mx-auto mb-6 w-48 h-48 glow-effect">
+          <h3 class="text-2xl font-semibold text-amber-400">Olivia Davis</h3>
+          <p class="text-amber-200">Art Director</p>
+          <p class="text-amber-300 mt-4">Painting the sands of Egypt and Carthage with vivid artistry.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-[#2c1b0f] text-center">
+    <p class="text-amber-200 text-lg">© 2025 Scroll of Relics by Legacy Games. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Smooth scrolling for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero section animations
+    gsap.from('.animate-logo', {
+      opacity: 0,
+      scale: 0.5,
+      rotation: 360,
+      duration: 2,
+      ease: 'elastic.out(1, 0.3)'
+    });
+    gsap.from('.animate-title', {
+      opacity: 0,
+      y: 100,
+      duration: 1.5,
+      ease: 'power4.out',
+      delay: 0.5
+    });
+    gsap.from('.hero-section p', {
+      opacity: 0,
+      x: -200,
+      duration: 1.5,
+      ease: 'power3.out',
+      delay: 1
+    });
+    gsap.from('.hero-section a', {
+      opacity: 0,
+      scale: 0.8,
+      duration: 1,
+      ease: 'back.out(1.7)',
+      delay: 1.5
+    });
+
+    // Parallax background for hero
+    gsap.to('.hero-section', {
+      backgroundPosition: '50% 100%',
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero-section',
+        scrub: true,
+        start: 'top top',
+        end: 'bottom top'
+      }
+    });
+
+    // Game section animations
+    gsap.from('.animate-section-title', {
+      scrollTrigger: {
+        trigger: '#game',
+        start: 'top 80%'
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: 'power3.out'
+    });
+    gsap.from('.animate-card', {
+      scrollTrigger: {
+        trigger: '#game',
+        start: 'top 70%'
+      },
+      opacity: 0,
+      y: 150,
+      rotationX: 45,
+      duration: 1.2,
+      stagger: 0.3,
+      ease: 'power4.out'
+    });
+    gsap.from('#game img', {
+      scrollTrigger: {
+        trigger: '#game',
+        start: 'top 70%'
+      },
+      clipPath: 'inset(100% 0 0 0)',
+      duration: 1.5,
+      stagger: 0.4,
+      ease: 'power3.inOut'
+    });
+
+    // Team section animations
+    gsap.from('#team .animate-section-title', {
+      scrollTrigger: {
+        trigger: '#team',
+        start: 'top 80%'
+      },
+      opacity: 0,
+      letterSpacing: '0.5em',
+      duration: 1,
+      ease: 'power3.out'
+    });
+    gsap.from('.animate-team', {
+      scrollTrigger: {
+        trigger: '#team',
+        start: 'top 70%'
+      },
+      opacity: 0,
+      scale: 0.5,
+      rotation: 180,
+      duration: 1.5,
+      stagger: 0.3,
+      ease: 'elastic.out(1, 0.5)'
+    });
+
+    // Particle animation on button hover
+    const discoverBtn = document.querySelector('.hero-section a');
+    discoverBtn.addEventListener('mouseenter', () => {
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        document.body.appendChild(particle);
+        const rect = discoverBtn.getBoundingClientRect();
+        gsap.set(particle, {
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2
+        });
+        gsap.to(particle, {
+          x: +=${gsap.utils.random(-100, 100)},
+          y: +=${gsap.utils.random(-100, 100)},
+          opacity: 0,
+          scale: gsap.utils.random(0.5, 2),
+          duration: gsap.utils.random(0.5, 1.5),
+          ease: 'power2.out',
+          onComplete: () => particle.remove()
+        });
+      }
+    });
+  </script>
+</body>
+</html>
